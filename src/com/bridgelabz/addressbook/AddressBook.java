@@ -1,23 +1,26 @@
 package com.bridgelabz.addressbook;
 
-import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBook {
-    static int contactID;
-    static Contact AddressBook[]=new Contact[10];
-
+    static ArrayList <Contact> AddressBook=new ArrayList();
+    static Scanner scanner=new Scanner(System.in);
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book");
 
         AddressBook addressBook=new AddressBook();
-        Contact contact1=addressBook.createContact();
-        addressBook.addContact(contact1);
-        System.out.println(contact1);
+        Contact contact=addressBook.createContact();
+        addressBook.addContact(contact);
+        System.out.println(contact);
+
+        System.out.println("enter name to edit contact");
+        String name=scanner.next();
+        addressBook.editContact(name);
+        System.out.println(contact);
     }
 
     Contact createContact(){
-        Scanner scanner=new Scanner(System.in);
         System.out.println("Enter first name");
         String firstName=scanner.next();
         System.out.println("Enter last name");
@@ -41,8 +44,31 @@ public class AddressBook {
     }
 
     void addContact(Contact contact){
-        AddressBook[contactID++]=contact;
+        AddressBook.add(contact);
         System.out.println("contact added to AddressBook");
     }
-
+    void editContact(String name){
+        for (Contact contact : AddressBook){
+            if (contact.firstName.equalsIgnoreCase(name)) {
+                System.out.println("Enter first name");
+                contact.firstName=scanner.next();
+                System.out.println("Enter last name");
+                contact.lastName=scanner.next();
+                System.out.println("Enter address");
+                contact.address=scanner.next();
+                System.out.println("Enter city");
+                contact.city=scanner.next();
+                System.out.println("Enter state");
+                contact.state=scanner.next();
+                System.out.println("Enter ZipCode");
+                contact.zipCode=scanner.nextInt();
+                System.out.println("Enter phoneNumber");
+                contact.phoneNumber=scanner.nextLong();
+                System.out.println("Enter Email");
+                contact.email=scanner.next();
+                System.out.println("contact updated successfully.");
+                break;
+            }
+        }
+    }
 }
