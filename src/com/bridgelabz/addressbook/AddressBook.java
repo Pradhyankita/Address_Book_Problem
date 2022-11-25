@@ -1,16 +1,18 @@
 package com.bridgelabz.addressbook;
 
+import java.sql.Array;
 import java.util.Scanner;
 
 public class AddressBook {
-    Contact contact;
+    static int contactID;
+    static Contact AddressBook[]=new Contact[10];
 
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book");
 
         AddressBook addressBook=new AddressBook();
         Contact contact1=addressBook.createContact();
-
+        addressBook.addContact(contact1);
         System.out.println(contact1);
     }
 
@@ -24,7 +26,6 @@ public class AddressBook {
         String address=scanner.next();
         System.out.println("Enter city");
         String city=scanner.next();
-        scanner.next();
         System.out.println("Enter state");
         String state=scanner.next();
         System.out.println("Enter ZipCode");
@@ -34,8 +35,14 @@ public class AddressBook {
         System.out.println("Enter Email");
         String email=scanner.next();
 
-        System.out.println("created new contact\n");
-        Contact contact=new Contact(\n firstName,lastName,address,city,state,zipCode,phoneNumber,email);
+        Contact contact=new Contact(firstName,lastName,address,city,state,zipCode,phoneNumber,email);
+        System.out.println("created new contact");
         return contact;
     }
+
+    void addContact(Contact contact){
+        AddressBook[contactID++]=contact;
+        System.out.println("contact added to AddressBook");
+    }
+
 }
