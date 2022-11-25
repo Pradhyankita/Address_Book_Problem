@@ -12,12 +12,8 @@ public class AddressBook {
         AddressBook addressBook=new AddressBook();
         Contact contact=addressBook.createContact();
         addressBook.addContact(contact);
-        System.out.println(contact);
-
-        System.out.println("enter name to edit contact");
-        String name=scanner.next();
-        addressBook.editContact(name);
-        System.out.println(contact);
+        addressBook.editContact();
+        addressBook.deleteContact();
     }
 
     Contact createContact(){
@@ -47,7 +43,9 @@ public class AddressBook {
         AddressBook.add(contact);
         System.out.println("contact added to AddressBook");
     }
-    void editContact(String name){
+    void editContact(){
+        System.out.println("enter name to edit contact");
+        String name=scanner.next();
         for (Contact contact : AddressBook){
             if (contact.firstName.equalsIgnoreCase(name)) {
                 System.out.println("Enter first name");
@@ -67,6 +65,19 @@ public class AddressBook {
                 System.out.println("Enter Email");
                 contact.email=scanner.next();
                 System.out.println("contact updated successfully.");
+                System.out.println(contact);
+                break;
+            }
+        }
+    }
+
+    void deleteContact(){
+        System.out.println("enter name to delete contact");
+        String name=scanner.next();
+        for (Contact contact : AddressBook){
+            if (contact.firstName.equalsIgnoreCase(name)) {
+                AddressBook.remove(contact);
+                System.out.println("contact deleted");
                 break;
             }
         }
